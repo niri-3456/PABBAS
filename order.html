@@ -1,0 +1,112 @@
+<!DOCTYPE ht
+<html>
+<head>
+  <title>Order page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .menu, .form-box {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .menu img {
+      width: 300px;
+      border-radius: 10px;
+    }
+
+    .ice-cream {
+      margin-bottom: 20px;
+    }
+
+    .form-box {
+      max-width: 300px;
+    }
+
+    .form-box h2 {
+      text-align: center;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .form-box button {
+      background-color: #ff5c8d;
+      color: white;
+      padding: 10px;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-box button:hover {
+      background-color: #ff3970;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="left-column"></div>
+    <div class="menu">
+      <div class="ice-cream">
+        <img src="https://tse4.mm.bing.net/th/id/OIP.N6hO3Cu2DqqB66DuY6JZ5QHaEA?cb=thfvnext&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Chocolate Blast">
+        <p><strong>Chocolate Blast</strong></p>
+      </div>
+      <div class="ice-cream">
+        <img src="https://pickyeaterblog.com/wp-content/uploads/2021/05/chocolate-banana-ice-cream-Final-2.jpg" alt="Banana Split">
+        <p><strong>Banana Split</strong></p>
+      </div>
+      <div class="ice-cream">
+        <img src="https://amandascookin.com/wp-content/uploads/2021/05/blueberry-lush-RC.jpg" alt="Berry Delight">
+        <p><strong>Berry Delight</strong></p>
+      </div>
+    </div>
+
+    <div class="form-box">
+      <h2>Order page</h2>
+      <img src="https://www.pngall.com/wp-content/uploads/14/Ice-Cream-Cone-PNG-Image-HD.png" width="50" style="display:block; margin:auto;" alt="ice cream">
+      <input type="text" id="name" placeholder="Your Name">
+      <input type="text" id="phone" placeholder="Phone Number">
+      <input type="text" id="flavour" placeholder="Ice Cream Name">
+      <input type="number" id="quantity" placeholder="Quantity">
+      <button onclick="showOrder()">ORDER</button>
+    </div>
+  </div>
+
+  <script>
+    function showOrder() {
+      var name = document.getElementById("name").value;
+      var phone = document.getElementById("phone").value;
+      var flavour = document.getElementById("flavour").value;
+      var quantity = document.getElementById("quantity").value;
+
+      console.log("Name: " + name);
+      console.log("Phone Number: " + phone);
+      console.log("Flavour: " + flavour);
+      console.log("Quantity: " + quantity);
+    }
+  </script>
+
+</body>
+</html>

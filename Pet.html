@@ -1,0 +1,155 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Pet List Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0,1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: calc(100% - 110px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px;
+      margin: 5px;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-btn {
+      background-color: #28a745;
+    }
+
+    .add-btn:hover {
+      background-color: #218838;
+    }
+
+    .search-btn {
+      background-color: #fd7e14;
+    }
+
+    .search-btn:hover {
+      background-color: #e8590c;
+    }
+
+    .remove-btn {
+      background-color: #dc3545;
+    }
+
+    .remove-btn:hover {
+      background-color: #c82333;
+    }
+
+    #searchResult {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 8px;
+      background-color: #e9ecef;
+      margin-bottom: 5px;
+      border-radius: 4px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Pet List Manager</h1>
+
+    <input type="text" id="petInput" placeholder="Enter pet name">
+    <button class="add-btn" onclick="addPet()">Push Pet</button>
+    <br>
+    <input type="text" id="searchInput" placeholder="Search pet">
+    <button class="search-btn" onclick="searchPet()">Search</button>
+    <br>
+    <button class="remove-btn" onclick="removePet()">Pop Pet</button>
+
+    <div id="searchResult"></div>
+    <ul id="petList"></ul>
+  </div>
+
+  <script>
+    let pets = [];
+
+    localforage.getItem('pets').then(savedPets => {
+      if (Array.isArray(savedPets)) {
+        pets = savedPets;
+        updateList();
+      }
+    });
+
+    function updateList() {
+      const list = document.getElementById('petList');
+      list.innerHTML = '';
+
+      pets.forEach(pet => {
+        const li = document.createElement('li');
+        li.textContent = pet;
+        list.appendChild(li);
+      });
+
+      localforage.setItem('pets', pets);
+    }
+
+    function addPet() {
+      const input = document.getElementById('petInput');
+      const value = input.value.trim();
+      if (value === '') return;
+
+      pets.push(value);
+      updateList();
+      input.value = '';
+    }
+
+    function removePet() {
+      if (pets.length === 0) return;
+
+      pets.pop();
+      updateList();
+    }
+
+    function searchPet() {
+      const searchValue = document.getElementById('searchInput').value.trim().toLowerCase();
+      const found = pets.some(pet => pet.toLowerCase() === searchValue);
+
+      const result = document.getElementById('searchResult');
+      result.textContent = found
+        ? `"${searchValue}" is in the list.`
+        : `"${searchValue}" not found.`;
+    }
+  </script>
+</body>
+</html>
